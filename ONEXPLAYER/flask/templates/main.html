@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>OneX - NHK2024</title>
+    <!-- <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+        integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
+        crossorigin="anonymous"></script> -->
+    <script type=text/javascript src="{{ url_for('static', filename='socket.io.min.js') }}"></script>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+    <script type=text/javascript src="{{ url_for('static', filename='main.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body oncontextmenu="return false;">
+    <div class="container">
+        <!-- <div id="communcation">
+            <div class="padding_small">
+                <div>
+                    <button id="add_delay">+1ms</button>
+                    delay: <span id="UDP_delay">-</span>ms<button id="reduce_delay">-1ms</button>
+                    <button id="python_exit">終了</button>
+                </div>
+                <div>接続端末: <strong id="user_count_value">0</strong> PING: <span id="ping">0</span>ms</div>
+                <div>IP: <span id="my_ip_address"></span></div>
+            </div>
+        </div> -->
+        <!-- <div id="strategy">
+            <div class="padding_small">
+                 赤・青の入力 これで前進自動化とかのプログラムが変わるから
+                <div id="timer">
+                    <div id="timer_text">00:00</div>
+                    <button id="timer_start">スタート</button>
+                </div>
+            </div>
+        </div>
+        <div id="log">
+            <div class="padding_small">
+                ログ(criticalのみ)<div id="logger_content"></div>
+            </div> -->
+        <!-- </div> -->
+        <div id="robots">
+            <div id="communcation">
+                <div class="padding_small">
+                    <div>
+                        <button id="add_delay">+1ms</button>
+                        delay: <span id="UDP_delay">-</span>ms<button id="reduce_delay">-1ms</button>
+                        <button id="python_exit">終了</button>
+                    </div>
+                    <div>接続端末: <strong id="user_count_value">0</strong> PING: <span id="ping">0</span>ms</div>
+                    <div><span id="my_ip_address"></span></div>
+                    <!-- <div>IP: <span id="my_ip_address"></span></div> -->
+                </div>
+            </div>
+            <div id="gamePad_1">
+                <div class="robot_name">P1<div class="ping_rssi"><span id="P1_ping">-</span>ms <span
+                            id="P1_RSSI">-</span>dBm</div>
+                </div>
+                <div class="padding_small">
+                    <div><span id="P1_name">-</span></div>
+                    <div>電圧: <span id="P1_battery">-</span>V</div>
+                </div>
+            </div>
+            <div id="gamePad_2">
+                <div class="robot_name">P2<div class="ping_rssi"><span id="P2_ping">-</span>ms <span
+                            id="P2_RSSI">-</span>dBm</div>
+                </div>
+                <div class="padding_small">
+                    <div><span id="P2_name">-</span></div>
+                    <div>電圧: <span id="P2_battery">-</span>V</div>
+                    <button id="GP2_change_wired">有線</button>
+                    <button id="GP2_change_wireless">無線</button>
+                </div>
+            </div>
+            <div id="gamePad_3">
+                <div class="robot_name">P3<div class="ping_rssi"><span id="P3_ping">-</span>ms <span
+                            id="P3_RSSI">-</span>dBm</div>
+                </div>
+                <div class="padding_small">
+                    <div><span id="P3_name">-</span></div>
+                    <div>電圧: <span id="P3_battery">-</span>V</div>
+                    <button id="GP3_change_wired">有線</button>
+                    <button id="GP3_change_wireless">無線</button>
+                </div>
+            </div>
+            <div id="R1" class="robot">
+                <div class="robot_name">R1<div class="ping_rssi"><span id="R1_ping">-</span>ms <span
+                            id="R1_RSSI">-</span>dBm</div>
+                </div>
+                <div class="padding_small">
+                    <!-- <button id="R1_initialize">初期化</button> -->
+                    <!-- <div id="grid_R1_inject"> -->
+                        <!-- <p class="text_center">R22定荷重</p> -->
+                        <!-- <p class="text_center">R21定荷重</p> -->
+                        <!-- <button id="R1_wheel_turn">旋回 左</button> -->
+                        <!-- <button id="R1_wheel_diagonal">斜め</button> -->
+                        <div>低速: <span id="R1.is_wheel_slow">-</span></div>
+                        <div>Cyber: <span id="R1_Cyber_position">-</span></div>
+                        <button id="R1_servo_big_prepare">サーボ0°</button>
+                        <!-- <button id="R1_servo_small_prepare">サーボ0°</button> -->
+                        <!-- <div>サーボ: <span id="R1.servo_big_position">-</span>°</div> -->
+                        <!-- <div>サーボ: <span id="R1.servo_small_position">-</span>°</div> -->
+                        <!-- <div></div> -->
+                        <!-- <div>位置: <span id="R1.RM_pull_position">-</span></div> -->
+                    <!-- </div> -->
+                    <!-- <button id="R1_set_M3508_origin">R21原点だし</button> -->
+                    <!-- <button id="R1_set_M3508_default_position">R21位置70%</button> -->
+                    <!-- <div>テンショナー角度: <span id="R1.Cyber_tension_position">-</span>°</div> -->
+                    <!-- <button id="R1_Cyber_tension_ResetPosition">テンショナー 原点</button> -->
+                    <!-- <button id="R1_inject_R2-1">射出</button>
+                    <button id="R1_inject_R2-2">射出</button> -->
+                    <!-- <div>タイヤFL: <span id="R1.wheel_FL_feedback"></span> / <span id="R1.wheel_FL_setting"></span>rpm</div>
+                <div>タイヤFR: <span id="R1.wheel_FR_feedback"></span> / <span id="R1.wheel_FR_setting"></span>rpm</div>
+                <div>タイヤRL: <span id="R1.wheel_RL_feedback"></span> / <span id="R1.wheel_RL_setting"></span>rpm</div>
+                <div>タイヤRR: <span id="R1.wheel_RR_feedback"></span> / <span id="R1.wheel_RR_setting"></span>rpm</div> -->
+
+                </div>
+            </div>
+            <div id="R2-1" class="robot">
+                <div class="robot_name">R21<div class="ping_rssi"><span id="R21_ping">-</span>ms <span
+                            id="R21_RSSI">-</span>dBm</div>
+                </div>
+                <div class="padding_small">
+                    <div>サーボ: <span id="R21.servo_position">-</span>°</div>
+                    <button id="R2-1_lock_servo" title="サーボの角度を射出体制にする">射出</button>
+                    <button id="R2-1_collect_servo">回収</button>
+                </div>
+            </div>
+            <div id="R2-2" class="robot">
+                <div class="robot_name">R22<div class="ping_rssi"><span id="R22_ping">-</span>ms <span
+                            id="R22_RSSI">-</span>dBm</div>
+                </div>
+                <div class="padding_small">
+                    <!-- <div>回収速度: <span id="R22.collect_setting"></span>rpm</div> -->
+                    <!-- <div>タイヤF: <span id="R22.wheel_F_setting"></span>rpm</div>
+                <div>タイヤRL: <span id="R22.wheel_RL_setting"></span>rpm</div>
+                <div>タイヤRR: <span id="R22.wheel_RR_setting"></span>rpm</div> -->
+                    <!-- <button id="R2-2_initialize">初期化</button> -->
+                    <div>低速: <span id="R22.is_wheel_slow">-</span></div>
+                    <!-- <button id="R2-2_collect">回収ON/OFF</button> -->
+                </div>
+            </div>
+            <div id="R2-3" class="robot">
+                <div class="robot_name">R23<div class="ping_rssi"><span id="R23_ping">-</span>ms <span
+                            id="R23_RSSI">-</span>dBm</div>
+                </div>
+                <div class="padding_small">
+                    <div>サイバー: <span id="R23.Cyber_position">-</span>°</div>
+                    <div>サーボ: <span id="R23.servo_position">-</span>°</div>
+                    <!-- <div>タイヤL: <span id="R22.wheel_left_setting"></span>rpm</div>
+                <div>タイヤR: <span id="R22.wheel_right_setting"></span>rpm</div> -->
+                    <button id="R2-3_initialize">初期化</button>
+                    <!-- <button id="R2-3_Cyber_free">サイバーfree</button>
+                    <button id="R2-3_Cyber_up">サイバー +5°</button>
+                    <button id="R2-3_Cyber_down">サイバー -5°</button>
+                    <button id="R2-3_servo_lock">サーボ ロック</button>
+                    <button id="R2-3_servo_release">サーボ 解放</button> -->
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

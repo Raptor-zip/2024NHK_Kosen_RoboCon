@@ -1,0 +1,9 @@
+# pip install -r pip_install.txt
+
+# Python packages
+Flask
+flask_socketio
+socketIO-client
+playsound
+netifaces
+pygame

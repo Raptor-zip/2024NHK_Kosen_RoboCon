@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=2024NHK ONEX
+Exec=gnome-terminal --geometry=80x50+0+0 -e 'python3 /home/toyota-robocon-b/2024_NHK_ONEX/main.py'
+Icon=/home/toyota-robocon-b/2024_NHK_ONEX/flask/static/favicon.png
+Terminal=true
+Type=Application

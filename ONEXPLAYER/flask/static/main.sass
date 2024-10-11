@@ -1,0 +1,250 @@
+$theme_blue: #1c71bd
+$theme_red: #df2121
+$background_color: #33373a
+$background_color_red: #850000
+
+$color1: #3a3a3a
+
+html,
+*
+    font-size: clamp(15px, calc(2.3vw + 0rem), 46px)
+    font-family: Arial, Helvetica, sans-serif
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    color: #ffffff
+    user-select: none
+
+body
+    background-color: #000000
+    &[emergency='1']
+        background-color: $background_color_red !important
+
+h1
+    font-size: 1rem
+
+span
+    font-weight: bold
+    // font-size: 1.1rem
+
+.text_center
+    text-align: center
+
+.padding_small
+    padding: 0.2rem
+
+.container
+    width: 50vw
+    height: 100vh
+    right: 0
+    position: absolute
+    // display: grid
+    // grid-template-columns: 2fr 1fr 1fr
+    // gap: 0.6rem
+    // grid-template-areas: "communication strategy log" "robots robots robots"
+
+.gauge
+    position: relative
+    border: 1px solid #fff
+    width: 100%
+
+    &_gauge
+        width: 0
+        height: 1rem
+        background: $theme_blue
+
+    &_char
+        position: absolute
+        width: 100%
+        top: 0
+        text-align: center
+        font-size: 0.9rem
+        line-height: 1rem
+
+.gauge_mini
+    .gauge_gauge
+        height: 0.7rem
+
+.gauge_mini
+    .gauge_char
+        font-size: 0.6rem
+        line-height: 0.7rem
+
+.parents
+    background-color: $background_color
+    width: calc(100% - 0.4rem)
+    height: calc(100% - 0.4rem)
+    margin: 0.2rem
+    padding: 0.2rem
+    &[emergency='1']
+        background-color: $theme_red
+
+#timer
+    grid-area: timer
+    margin: 0.1rem
+
+    .gauge
+        border: none
+        margin: 0.1rem
+        background-color: $background_color
+
+        &_gauge
+            height: 2rem
+            background: $theme_blue
+
+        &_char
+            font-size: 1.9rem
+            line-height: 2rem
+
+#communcation
+    grid-area: communication
+    background: $color1
+
+#strategy
+    grid-area: "strategy"
+    background: $color1
+
+#log
+    grid-area: "log"
+    background: $color1
+
+    #logger_content p
+        font-family: 'Courier New', Consolas, monospace
+
+#gamePad_1
+    background: $color1
+
+#gamePad_2
+    background: $color1
+
+#gamePad_3
+    background: $color1
+
+.ping_rssi
+    display: inline
+    position: absolute
+    right: 0.3rem
+    top: 1.3rem
+    line-height: 1.5rem
+    font-size: 0.9rem
+
+.grid_2columns
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 0.1rem
+
+
+
+#robots
+    grid-area: robots
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    gap: 0.3rem
+    grid-template-areas: "GP1 GP2 GP3" "R1 R21 R22" "R23 communication communication"
+    height: 100vh
+
+.robot
+    background: $color1
+
+#grid_R1_inject
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 0.1rem
+
+#R1
+    grid-area: R1
+#R2-1
+    grid-area: R21
+#R2-2
+    grid-area: R22
+#R2-3
+    grid-area: R23
+#gamePad_1
+    grid-area: GP1
+#gamePad_2
+    grid-area: GP2
+#gamePad_3
+    grid-area: GP3
+
+.robot_name
+    font-weight: bold
+    background-color: #00417f
+    position: relative
+    padding: 0.1rem 0 0.1rem 0.3rem
+    font-size: 1.2rem
+    height: 2.5rem
+
+/* ボタンの基本スタイル */
+button
+    display: inline-block
+    margin: 0.2rem 0.1rem
+    padding: 0.3rem 0.4rem
+    font-weight: bold
+    text-align: center
+    text-decoration: none
+    cursor: pointer
+    border: solid 1px #fff
+    background: none
+    // color: #fff
+    background-color: #1c71bd
+    &:hover
+        background-color: #145492
+    &:active
+        background-color: #0e3a64
+
+input[type="number"]
+    background-color: black
+    color: white
+
+input[type="range"]
+    -webkit-appearance: none
+    /* 🚩これ無しだとスタイルがほぼ全く反映されないので注意 */
+    appearance: none
+    cursor: pointer
+    /* カーソルを分かりやすく */
+    outline: none
+    /* スライダーのアウトラインは見た目がキツイので消す */
+    height: 14px
+    /* バーの高さ */
+    width: 100%
+    /* バーの幅 */
+    background: #8acdff
+    /* バーの背景色 */
+    border-radius: 10px
+    /* バーの両端の丸み */
+    border: solid 3px #dff1ff
+    /* バー周囲の線 */
+
+/* WebKit向けのつまみ */
+input[type="range"]::-webkit-slider-thumb
+    -webkit-appearance: none
+    /*  🚩デフォルトのつまみのスタイルを解除 */
+    background: $theme_blue
+    /* 背景色 */
+    width: 24px
+    /* 幅 */
+    height: 24px
+    /* 高さ */
+    border-radius: 50%
+    /* 円形に */
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15)
+    /* 影 */
+
+/* Moz向けのつまみ */
+input[type="range"]::-moz-range-thumb
+    background: $theme_blue
+    /* 背景色 */
+    width: 24px
+    /* 幅 */
+    height: 24px
+    /* 高さ */
+    border-radius: 50%
+    /* 円形に */
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15)
+    /* 影 */
+    border: none
+    /* デフォルトの線を消す */
+
+/* Firefoxで点線が周りに表示されてしまう問題の解消 */
+input[type="range"]::-moz-focus-outer
+    border: 0
