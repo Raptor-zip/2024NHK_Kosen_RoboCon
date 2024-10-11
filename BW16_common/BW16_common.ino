@@ -63,7 +63,7 @@ void setup()
     digitalWrite(CMB_G, HIGH);
     Serial.println("WiFi接続中");
 
-    WiFi.config(IPAddress(192, 168, 11, IP));
+    WiFi.config(IPAddress(192, 168, IP_SEGMENT, IP_HOST));
     WiFi.begin(ssid, pass);
     digitalWrite(CMB_G, LOW);
     delay(100);
